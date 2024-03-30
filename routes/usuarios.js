@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/mostrar', async function(req, res, next) {
   try{
+    console.log("Prueba")
     const e=await usuarios.find({});
     res.json(e);}
   catch(error){
