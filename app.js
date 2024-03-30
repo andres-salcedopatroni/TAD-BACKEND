@@ -2,6 +2,7 @@ require('dotenv').config();
 const Usuario=process.env.USUARIO;
 const Clave=process.env.CLAVE;
 const BD=process.env.BD;
+const CLUSTER=process.env.CLUSTER;
 //Express
 var createError = require('http-errors');
 var express = require('express');
@@ -15,7 +16,7 @@ var cors = require('cors')
 
 //Conexion Atlas
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://'+Usuario+':'+Clave+'@cluster0.4wtcxn6.mongodb.net/'+BD+'?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://'+Usuario+':'+Clave+'@'+CLUSTER+'/'+BD+'?retryWrites=true&w=majority');
 
 var app = express();
 
