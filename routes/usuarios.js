@@ -12,9 +12,18 @@ router.get('/', function(req, res, next) {
 
 router.get('/mostrar', async function(req, res, next) {
   try{
-    console.log("Prueba")
-    const e=await usuarios.find({});
-    res.json(e);}
+    const lista_usuarios=await usuarios.find({});
+    res.json(lista_usuarios);}
+  catch(error){
+    res.status(400).json({'mensaje':error})
+  }
+});
+
+router.get('/obtener/:codigo', async function(req, res, next) {
+  try{
+    const codigo=req.params.codigo;
+    const usuario=await usuarios.findOne({codigo:codigo});
+    res.json(usuario);}
   catch(error){
     res.status(400).json({'mensaje':error})
   }

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const schema_usuarios= new Schema(
     { 
         nombre: String, 
+        codigo: String,
         clave: {type: String, required: true},
         correo: {type: String, unique: true, required: true},
         celular: {type: Number, unique: true, required: true},
