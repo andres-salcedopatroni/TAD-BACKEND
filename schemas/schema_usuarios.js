@@ -3,10 +3,12 @@ const Schema = mongoose.Schema;
 const schema_usuarios= new Schema(
     { 
         nombre: String, 
-        codigo: {type: String, unique: true, required: true},
-        clave: {type: String, required: true},
+        codigo: {type: String},
+        clave: {type: String},
+        tipo: {type: String},
+        dni_ruc: {type: String},
         correo: {type: String, unique: true, required: true},
-        celular: {type: Number, unique: true, required: true},
+        celular: {type: Number},
         fecha: Date
     });
 
