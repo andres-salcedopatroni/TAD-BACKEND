@@ -38,7 +38,7 @@ router.post('/agregar',
       const e = new usuarios({
         nombre: pedido.nombre, 
         codigo: lista_usuarios.length,
-        clave: pedido.usuario,
+        clave: pedido.clave,
         correo: pedido.correo,
         celular: pedido.celular,
         fecha: fecha,
