@@ -29,6 +29,21 @@ router.get('/obtener/:codigo', async function(req, res, next) {
   }
 });
 
+router.get('/loggear/:correo&:clave', async function(req, res, next) {
+  try{
+    const correo=req.params.correo;
+    const clave=req.params.clave;
+    const usuario=await usuarios.findOne({correo:correo,clave:clave});
+    if(usuario)
+      res.json(usuario);
+    else
+      res.status(400).json({'mensaje':error})
+  }
+  catch(error){
+    res.status(400).json({'mensaje':error})
+  }
+});
+
 router.post('/agregar', 
   async function(req, res, next) {
     const fecha = new Date();
