@@ -47,12 +47,11 @@ router.get('/loggear/:correo&:clave', async function(req, res, next) {
 router.post('/agregar', 
   async function(req, res, next) {
     const fecha = new Date();
-    const lista_usuarios=await usuarios.find({});
     const pedido = req.body;
     try{
       const e = new usuarios({
         nombre: pedido.nombre, 
-        codigo: lista_usuarios.length,
+        codigo: pedido.dni_ruc,
         clave: pedido.clave,
         correo: pedido.correo,
         celular: pedido.celular,
