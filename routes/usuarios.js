@@ -42,6 +42,8 @@ router.post('/agregar',
         correo: pedido.correo,
         celular: pedido.celular,
         fecha: fecha,
+        dni_ruc: pedido.dni_ruc,
+        tipo: pedido.tipo
       });
       await e.save();
       res.json({'mensaje':'Usuario agregado'});
