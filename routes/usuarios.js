@@ -86,6 +86,7 @@ router.put('/actualizar', async function(req, res, next) {
     e.nombre = pedido.nombre;
     e.correo = pedido.correo;
     e.celular = pedido.celular;
+    e.tipo = pedido.tipo;
     await e.save();
     res.json({"mensaje": "Estudiante actualizado"});
   }
