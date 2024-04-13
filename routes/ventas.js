@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 //Mongo
-const schema_ventas=require('../schemas/schema_ventas');
+const schema_ventas=require('../schemas/schema_venta');
 const ventas = mongoose.model('Ventas', schema_ventas,'Ventas');
 
 router.get('/obtener/:dni_ruc', async function(req, res, next) {
