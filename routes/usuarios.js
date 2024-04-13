@@ -69,15 +69,28 @@ router.post('/agregar',
   }
 );
 
-router.delete('/eliminar', async function(req, res, next) {
+router.delete('/eliminar_mi_usuario', async function(req, res, next) {
   try{
     const pedido=req.body;
-    await usuarios.deleteMany({dni_ruc: pedido.dni_ruc});
-    await producto.deleteMany({codigo_productor: pedido.dni_ruc});
-    res.json({"mensaje": "Usuario eliminado"});
+    const session = await mongoose.startSession();
+    let error = '';
+    await session.withTransaction( async function() {
+      try{
+        await usuarios.deleteMany({dni_ruc: pedido.dni_ruc});
+        await producto.deleteMany({codigo_productor: pedido.dni_ruc});
+      }
+      catch(err){
+        error = err;
+      }
+    });
+    await session.endSession();
+    if(error == '')
+      res.json({'mensaje':'Usuario agregado'});
+    else
+      res.status(400).json({'mensaje':error});
   }
   catch(error){
-    res.status(400).json({'mensaje':error})
+    res.status(400).json({'mensaje':error});
   }
 });
 
