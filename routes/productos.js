@@ -20,10 +20,11 @@ router.get('/mostrar', async function(req, res, next) {
     }
 });
 
-router.get('/obtener/:codigo', async function(req, res, next) {
+router.get('/obtener/:nombre&:codigo_productor', async function(req, res, next) {
     try{
-      const codigo=req.params.codigo;
-      const p=await producto.findOne({codigo:codigo});
+      const nombre=req.params.nombre;
+      const codigo_productor=req.params.codigo_productor;
+      const p=await producto.findOne({codigo_productor:codigo_productor,nombre:nombre});
       res.json(p);}
     catch(error){
       res.status(400).json({'mensaje':error})
@@ -37,7 +38,6 @@ router.post('/agregar',
     try{
       const p = new producto({
         nombre: pedido.nombre,  
-        codigo: pedido.codigo_productor+pedido.nombre,
         codigo_productor: pedido.codigo_productor,
         categoria: pedido.categoria,
         precio: pedido.precio,
@@ -57,7 +57,7 @@ router.post('/agregar',
 router.delete('/eliminar', async function(req, res, next) {
     try{
       const pedido=req.body;
-      await producto.deleteMany({codigo: pedido.codigo});
+      await producto.deleteMany({codigo_productor: pedido.codigo_productor, nombre: pedido.nombre});
       res.json({"mensaje": "Producto eliminado"});
     }
     catch(error){
@@ -68,7 +68,7 @@ router.delete('/eliminar', async function(req, res, next) {
 router.put('/actualizar', async function(req, res, next) {
     try{
       const pedido=req.body;
-      const p = await producto.findOne({codigo: pedido.codigo});
+      const p = await producto.findOne({codigo_productor: pedido.codigo_productor, nombre: pedido.nombre});
       p.nombre = pedido.nombre; 
       p.categoria = pedido.categoria,
       p.precio = pedido.precio,

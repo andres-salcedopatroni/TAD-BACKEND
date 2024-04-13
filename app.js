@@ -13,6 +13,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 const usuariosRouter = require('./routes/usuarios');
 const productosRouter = require('./routes/productos');
+const ventasRouter = require('./routes/ventas');
 var cors = require('cors')
 
 //Conexion Atlas
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/productos', productosRouter);
+app.use('/ventas', ventasRouterRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

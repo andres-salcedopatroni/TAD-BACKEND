@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 //Mongo
 const schema_usuarios=require('../schemas/schema_usuarios');
 const usuarios = mongoose.model('Usuarios', schema_usuarios,'Usuarios');
+const schema_producto=require('../schemas/schema_producto');
+const producto = mongoose.model('Productos', schema_producto,'Productos');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -19,10 +21,10 @@ router.get('/mostrar', async function(req, res, next) {
   }
 });
 
-router.get('/obtener/:codigo', async function(req, res, next) {
+router.get('/obtener/:dni_ruc', async function(req, res, next) {
   try{
-    const codigo=req.params.codigo;
-    const usuario=await usuarios.findOne({codigo:codigo});
+    const dni_ruc=req.params.dni_ruc;
+    const usuario=await usuarios.findOne({dni_ruc:dni_ruc});
     res.json(usuario);}
   catch(error){
     res.status(400).json({'mensaje':error})
@@ -51,7 +53,6 @@ router.post('/agregar',
     try{
       const e = new usuarios({
         nombre: pedido.nombre, 
-        codigo: pedido.dni_ruc,
         clave: pedido.clave,
         correo: pedido.correo,
         celular: pedido.celular,
@@ -71,8 +72,9 @@ router.post('/agregar',
 router.delete('/eliminar', async function(req, res, next) {
   try{
     const pedido=req.body;
-    await usuarios.deleteMany({codigo: pedido.codigo});
-    res.json({"mensaje": "Estudiante eliminado"});
+    await usuarios.deleteMany({dni_ruc: pedido.dni_ruc});
+    await producto.deleteMany({codigo_productor: pedido.dni_ruc});
+    res.json({"mensaje": "Usuario eliminado"});
   }
   catch(error){
     res.status(400).json({'mensaje':error})
@@ -82,7 +84,7 @@ router.delete('/eliminar', async function(req, res, next) {
 router.put('/actualizar', async function(req, res, next) {
   try{
     const pedido=req.body;
-    const e = await usuarios.findOne({codigo: pedido.codigo});
+    const e = await usuarios.findOne({dni_ruc: pedido.dni_ruc});
     e.nombre = pedido.nombre;
     e.correo = pedido.correo;
     e.celular = pedido.celular;
