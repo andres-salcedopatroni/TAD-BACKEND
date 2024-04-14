@@ -43,7 +43,7 @@ router.post('/registrar_ventas', async function(req, res, next) {
             precio: v.precio,
             fecha: fecha,
           });
-          await venta.save();
+          await venta.save({ session: session });
         }
       }
       catch(err){

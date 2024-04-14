@@ -76,8 +76,8 @@ router.delete('/eliminar_mi_usuario', async function(req, res, next) {
     let error = '';
     await session.withTransaction( async function() {
       try{
-        await usuarios.deleteMany({dni_ruc: pedido.dni_ruc});
-        await producto.deleteMany({codigo_productor: pedido.dni_ruc});
+        await usuarios.deleteMany({dni_ruc: pedido.dni_ruc},{ session: session });
+        await producto.deleteMany({codigo_productor: pedido.dni_ruc},{ session: session });
       }
       catch(err){
         await session.abortTransaction();
