@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const schema_producto= new Schema(
+const schema_productos= new Schema(
     { 
         nombre: String, 
         codigo_productor: String,
@@ -11,4 +11,4 @@ const schema_producto= new Schema(
         fecha: Date
     });
 
-module.exports=schema_producto
+module.exports=schema_productos

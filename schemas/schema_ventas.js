@@ -5,6 +5,7 @@ const schema_ventas= new Schema(
         codigo_productor: String,
         nombre_producto: String,
         codigo_comprador: String,
+        cantidad: Number,
         precio: Number,
         fecha: Date
     });

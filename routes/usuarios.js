@@ -4,13 +4,8 @@ const mongoose = require('mongoose');
 //Mongo
 const schema_usuarios=require('../schemas/schema_usuarios');
 const usuarios = mongoose.model('Usuarios', schema_usuarios,'Usuarios');
-const schema_producto=require('../schemas/schema_producto');
-const producto = mongoose.model('Productos', schema_producto,'Productos');
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const schema_productos=require('../schemas/schema_productos');
+const producto = mongoose.model('Productos', schema_productos,'Productos');
 
 router.get('/mostrar', async function(req, res, next) {
   try{
