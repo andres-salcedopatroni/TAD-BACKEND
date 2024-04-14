@@ -80,6 +80,7 @@ router.delete('/eliminar_mi_usuario', async function(req, res, next) {
         await producto.deleteMany({codigo_productor: pedido.dni_ruc});
       }
       catch(err){
+        await session.abortTransaction();
         error = err;
       }
     });

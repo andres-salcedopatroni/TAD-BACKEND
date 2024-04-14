@@ -47,6 +47,7 @@ router.post('/registrar_ventas', async function(req, res, next) {
         }
       }
       catch(err){
+        await session.abortTransaction();
         error = err;
       }
     });
