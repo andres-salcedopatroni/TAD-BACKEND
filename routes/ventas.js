@@ -41,6 +41,7 @@ router.post('/registrar_ventas', async function(req, res, next) {
             nombre_producto: v.nombre_producto,
             codigo_comprador: v.codigo_comprador,
             precio: v.precio,
+            cantidad: v.cantidad,
             fecha: fecha,
           });
           await venta.save({ session: session });

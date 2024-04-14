@@ -64,7 +64,6 @@ router.put('/actualizar', async function(req, res, next) {
     try{
       const pedido=req.body;
       const p = await producto.findOne({codigo_productor: pedido.codigo_productor, nombre: pedido.nombre});
-      p.nombre = pedido.nombre; 
       p.categoria = pedido.categoria,
       p.precio = pedido.precio,
       p.unidad = pedido.unidad,
