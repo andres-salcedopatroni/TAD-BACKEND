@@ -1,18 +1,19 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const mongoose = require('mongoose');
 //Mongo
-const schema_usuarios=require('../schemas/schema_usuarios');
+const schema_usuarios = require('../schemas/schema_usuarios');
 const usuarios = mongoose.model('Usuarios', schema_usuarios,'Usuarios');
-const schema_productos=require('../schemas/schema_productos');
+const schema_productos = require('../schemas/schema_productos');
 const productos = mongoose.model('Productos', schema_productos,'Productos');
-const schema_ventas=require('../schemas/schema_ventas');
+const schema_ventas = require('../schemas/schema_ventas');
 const ventas = mongoose.model('Ventas', schema_ventas,'Ventas');
 
 
-router.get('/mostrar', async function(req, res, next) {
+//Obtener usuarios
+router.get('/obtener_usuarios', async function(req, res, next) {
   try{
-    const lista_usuarios=await usuarios.find({});
+    const lista_usuarios = await usuarios.find({});
     res.json(lista_usuarios);
   }
   catch(error){
@@ -20,64 +21,66 @@ router.get('/mostrar', async function(req, res, next) {
   }
 });
 
-router.get('/obtener/:dni_ruc', async function(req, res, next) {
+//Obtener usuario
+router.get('/obtener_usuario/:dni_ruc', async function(req, res, next) {
   try{
-    const dni_ruc=req.params.dni_ruc;
-    const usuario=await usuarios.findOne({dni_ruc:dni_ruc});
+    const dni_ruc = req.params.dni_ruc;
+    const usuario = await usuarios.findOne({dni_ruc:dni_ruc});
     res.json(usuario);
   }
   catch(error){
-    res.status(400).json({'mensaje':error})
+    res.status(400).json({'mensaje':error});
   }
 });
 
+//Ingreso usuario
 router.get('/loggear/:correo&:clave', async function(req, res, next) {
   try{
-    const correo=req.params.correo;
-    const clave=req.params.clave;
-    const usuario=await usuarios.findOne({correo:correo,clave:clave});
+    const correo = req.params.correo;
+    const clave = req.params.clave;
+    const usuario = await usuarios.findOne({correo:correo,clave:clave});
     if(usuario)
       res.json(usuario);
     else
-      res.status(400).json({'mensaje':error})
+      res.status(400).json({'mensaje':"El usuario no existe"});
   }
   catch(error){
-    res.status(400).json({'mensaje':error})
+    res.status(400).json({'mensaje':error});
   }
 });
 
-router.post('/agregar', 
-  async function(req, res, next) {
-    const fecha = new Date();
-    const pedido = req.body;
-    try{
-      const e = new usuarios({
-        nombre: pedido.nombre, 
-        clave: pedido.clave,
-        correo: pedido.correo,
-        celular: pedido.celular,
-        fecha: fecha,
-        dni_ruc: pedido.dni_ruc,
-        tipo: pedido.tipo
-      });
-      await e.save();
-      res.json({'mensaje':'Usuario agregado'});
-    }
-    catch(error){
-      res.status(400).json({'mensaje':error});
-    };
+//Agregar usuario
+router.post('/agregar_usuario', async function(req, res, next) {
+  const fecha = new Date();
+  const usuario = req.body;
+  try{
+    const usuario_creado = new usuarios({
+      nombre: usuario.nombre, 
+      clave: usuario.clave,
+      correo: usuario.correo,
+      celular: usuario.celular,
+      fecha: fecha,
+      dni_ruc: usuario.dni_ruc,
+      tipo: usuario.tipo
+    });
+    await usuario_creado.save();
+    res.json({'mensaje':'Usuario agregado'});
   }
-);
+  catch(error){
+    res.status(400).json({'mensaje':error});
+  };
+});
 
+//Eliminar usuario
 router.delete('/eliminar_mi_usuario', async function(req, res, next) {
   try{
-    const pedido=req.body;
+    const usuario = req.body;
     const session = await mongoose.startSession();
     let error = '';
     await session.withTransaction( async function() {
       try{
-        await usuarios.deleteMany({dni_ruc: pedido.dni_ruc},{ session: session });
-        await productos.deleteMany({codigo_productor: pedido.dni_ruc},{ session: session });
+        await usuarios.deleteMany({dni_ruc: usuario.dni_ruc},{ session: session });
+        await productos.deleteMany({codigo_productor: usuario.dni_ruc},{ session: session });
       }
       catch(err){
         await session.abortTransaction();
@@ -86,7 +89,7 @@ router.delete('/eliminar_mi_usuario', async function(req, res, next) {
     });
     await session.endSession();
     if(error == '')
-      res.json({'mensaje':'Usuario agregado'});
+      res.json({'mensaje':'Usuario eliminado'});
     else
       res.status(400).json({'mensaje':error});
   }
@@ -95,15 +98,15 @@ router.delete('/eliminar_mi_usuario', async function(req, res, next) {
   }
 });
 
-//Actualizar Usuario
-router.put('/actualizar_usuario', async function(req, res, next) {
+//Actualizar usuario
+router.put('/actualizar_mi_usuario', async function(req, res, next) {
   try{
     const usuario_nuevo = req.body.usuario_nuevo;
     const usuario_antiguo = req.body.usuario_antiguo;
     const usuario = await usuarios.findOne({dni_ruc: usuario_antiguo.dni_ruc});
-    const mis_productos = await productos.findOne({codigo_productor: usuario_antiguo.dni_ruc});
-    const mis_ventas = await ventas.findOne({codigo_productor: usuario_antiguo.dni_ruc});
-    const mis_compras = await ventas.findOne({codigo_comprador: usuario_antiguo.dni_ruc});
+    const mis_productos = await productos.find({codigo_productor: usuario_antiguo.dni_ruc});
+    const mis_ventas = await ventas.find({codigo_productor: usuario_antiguo.dni_ruc});
+    const mis_compras = await ventas.find({codigo_comprador: usuario_antiguo.dni_ruc});
     const session = await mongoose.startSession();
     let error = '';
     await session.withTransaction( async function() {
