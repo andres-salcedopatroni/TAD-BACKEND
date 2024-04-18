@@ -18,6 +18,17 @@ router.get('/obtener_productos', async function(req, res, next) {
   }
 });
 
+router.get('/obtener_mis_productos/:codigo_productor', async function(req, res, next) {
+  try{
+    const codigo_productor = req.params.codigo_productor;
+    const lista_productos = await productos.find({codigo_productor:codigo_productor});
+    res.json(lista_productos);
+  }
+  catch(error){
+    res.status(400).json({'mensaje':error});
+  }
+});
+
 //Obtener producto
 router.get('/obtener_producto/:nombre&:codigo_productor', async function(req, res, next) {
   try{
