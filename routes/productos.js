@@ -18,6 +18,7 @@ router.get('/obtener_productos', async function(req, res, next) {
   }
 });
 
+//
 router.get('/obtener_mis_productos/:codigo_productor', async function(req, res, next) {
   try{
     const codigo_productor = req.params.codigo_productor;
