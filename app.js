@@ -15,7 +15,7 @@ const usuariosRouter = require('./routes/usuarios');
 const productosRouter = require('./routes/productos');
 const ventasRouter = require('./routes/ventas');
 const cors = require('cors')
-
+var bodyParser = require('body-parser')
 //Conexion Atlas
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://'+Usuario+':'+Clave+'@'+CLUSTER+'/'+BD+'?retryWrites=true&w=majority');
