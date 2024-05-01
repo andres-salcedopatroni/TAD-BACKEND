@@ -21,6 +21,42 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+//Mongo
+const mongoose = require('mongoose');
+const schema_usuarios = require('../schemas/schema_usuarios');
+const usuarios = mongoose.model('Usuarios', schema_usuarios,'Usuarios');
+
+const io = require('socket.io')(server, {
+  cors: {origin : '*'}
+});
+
+io.on('connection', (socket) => {
+
+  socket.on('agregar-usuario', async function (datos) {
+    const fecha = new Date();
+    const usuario = datos;
+    try{
+      const usuario_creado = new usuarios({
+        imagen: usuario.imagen, 
+        nombre: usuario.nombre, 
+        clave: usuario.clave,
+        correo: usuario.correo,
+        celular: usuario.celular,
+        fecha: fecha,
+        dni_ruc: usuario.dni_ruc,
+        tipo: usuario.tipo
+      });
+      await usuario_creado.save();
+      io.emit('respuesta', 'Usuario agregado');
+    }
+    catch(error){
+      io.emit('respuesta', error);
+    };
+    
+  });
+
+});
+
 /**
  * Listen on provided port, on all network interfaces.
  */
