@@ -29,16 +29,20 @@ const usuarios = mongoose.model('Usuarios', schema_usuarios,'Usuarios');
 const io = require('socket.io')(server, {
   cors: {origin : '*'}
 });
-var usuario = '';
+var usuarioStream = '';
 io.on('connection', (socket) => {
 
   socket.on('usuario', async function (datos) {
-    usuario=usuario+datos;
+    if(datos=='Completado'){
+      io.emit('empezar', 'empezar');
+    }
+    else{
+    usuarioStream=usuarioStream+datos;}
   });
 
   socket.on('agregar-usuario', async function (datos) {
     const fecha = new Date();
-    const usuario = datos;
+    const usuario = JSON.parse(usuarioStream);
     try{
       const usuario_creado = new usuarios({
         imagen: usuario.imagen, 
