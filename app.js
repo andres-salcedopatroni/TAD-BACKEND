@@ -14,7 +14,7 @@ var indexRouter = require('./routes/index');
 const usuariosRouter = require('./routes/usuarios');
 const productosRouter = require('./routes/productos');
 const ventasRouter = require('./routes/ventas');
-var cors = require('cors')
+const cors = require('cors')
 
 //Conexion Atlas
 const mongoose = require('mongoose');
@@ -30,13 +30,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors({ origin: '*' }));
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/productos', productosRouter);
 app.use('/ventas', ventasRouter);
 
-app.use(cors({ origin: '*' }));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
