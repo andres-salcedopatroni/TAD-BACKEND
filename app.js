@@ -29,7 +29,9 @@ app.use(logger('dev'));
 app.use(cors({
   origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false
+  preflightContinue: false,
+  allowedHeaders : "Origin, X-Requested-With, Content-Type, Accept",
+  credentials: true
 }));
 app.use(express.json({limit: '50MB'}));
 app.use(express.urlencoded({limit: '50MB', extended: false}));
