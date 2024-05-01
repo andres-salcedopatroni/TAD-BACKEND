@@ -29,8 +29,12 @@ const usuarios = mongoose.model('Usuarios', schema_usuarios,'Usuarios');
 const io = require('socket.io')(server, {
   cors: {origin : '*'}
 });
-
+var usuario = '';
 io.on('connection', (socket) => {
+
+  socket.on('usuario', async function (datos) {
+    usuario=usuario+datos;
+  });
 
   socket.on('agregar-usuario', async function (datos) {
     const fecha = new Date();
