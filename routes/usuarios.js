@@ -55,6 +55,7 @@ router.post('/agregar_usuario', async function(req, res, next) {
   const usuario = req.body;
   try{
     const usuario_creado = new usuarios({
+      imagen: usuario.imagen, 
       nombre: usuario.nombre, 
       clave: usuario.clave,
       correo: usuario.correo,
@@ -111,6 +112,7 @@ router.put('/actualizar_mi_usuario', async function(req, res, next) {
     let error = '';
     await session.withTransaction( async function() {
       try{
+        usuario.imagen = usuario_nuevo.imagen;
         usuario.nombre = usuario_nuevo.nombre;
         usuario.clave = usuario_nuevo.clave;
         usuario.tipo = usuario_nuevo.tipo;
