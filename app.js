@@ -49,6 +49,8 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/productos', productosRouter);
