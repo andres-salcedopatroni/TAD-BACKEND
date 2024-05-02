@@ -26,16 +26,10 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
-app.use(express.bodyParser({limit: '50mb'}));
-app.use(cors({
-  origin: "*",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  allowedHeaders : "Origin, X-Requested-With, Content-Type, Accept",
-  credentials: true
-}));
-app.use(express.json({parameterLimit: 100000,limit: '25MB'}));
-app.use(express.urlencoded({parameterLimit: 100000,limit: '25MB'}));
+app.use(express.bodyParser({limit: '25mb'}));
+app.use(express.json({limit: '25MB'}));
+app.use(express.urlencoded({Limit: '25MB'}));
+app.use(cors());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
