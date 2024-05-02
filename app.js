@@ -25,10 +25,11 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(logger('dev'));
 app.use(cors());
-app.use(bodyParser.json({limit: '10000kb'}));
-app.use(bodyParser.urlencoded({Limit: '10000kb', extended: false }));
+app.use(logger('dev'));
+app.use(express({limit: '50mb'}));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: "50mb", extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
