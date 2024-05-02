@@ -50,7 +50,7 @@ router.get('/loggear/:correo&:clave', async function(req, res, next) {
 });
 
 //Agregar usuario
-router.post('/agregar_usuario', json({parameterLimit: 100000, limit: '50mb' }), async function(req, res, next) {
+router.post('/agregar_usuario', async function(req, res, next) {
   const fecha = new Date();
   const usuario = req.body;
   try{
