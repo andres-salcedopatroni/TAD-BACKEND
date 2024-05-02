@@ -34,7 +34,7 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json({limit: '500MB'}));
-app.use(express.urlencoded({limit: '500MB', extended: false}));
+app.use(express.urlencoded({limit: '500MB', extended: true, parameterLimit: 50000}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
