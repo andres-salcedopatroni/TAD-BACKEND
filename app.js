@@ -33,8 +33,8 @@ app.use(cors({
   allowedHeaders : "Origin, X-Requested-With, Content-Type, Accept",
   credentials: true
 }));
-app.use(express.json({limit: '50MB'}));
-app.use(express.urlencoded({limit: '50MB', extended: false}));
+app.use(express.json({limit: '500MB'}));
+app.use(express.urlencoded({limit: '500MB', extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
