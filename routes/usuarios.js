@@ -13,7 +13,7 @@ const ventas = mongoose.model('Ventas', schema_ventas,'Ventas');
 //Obtener usuarios
 router.get('/obtener_usuarios', async function(req, res, next) {
   try{
-    const lista_usuarios = await usuarios.find({});
+    const lista_usuarios = await usuarios.find({},{dni_ruc:1});
     res.json(lista_usuarios);
   }
   catch(error){
