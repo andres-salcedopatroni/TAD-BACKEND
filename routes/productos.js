@@ -10,7 +10,7 @@ const ventas = mongoose.model('Ventas', schema_ventas,'Ventas');
 //Obtener productos
 router.get('/obtener_productos', async function(req, res, next) {
   try{
-    const lista_productos = await productos.find({});
+    const lista_productos = await productos.find({},{codigo_productor:1,nombre:1});
     res.json(lista_productos);
   }
   catch(error){
@@ -51,6 +51,7 @@ router.post('/agregar_producto', async function(req, res, next) {
     const nuevo_producto = new productos({
       nombre: producto.nombre,  
       codigo_productor: producto.codigo_productor,
+      imagen: producto.imagen, 
       categoria: producto.categoria,
       precio: producto.precio,
       unidad: producto.unidad,
@@ -89,6 +90,7 @@ router.put('/actualizar_mi_producto', async function(req, res, next) {
     await session.withTransaction( async function() {
       try{
         mi_producto.nombre = producto_nuevo.nombre;
+        mi_producto.imagen = producto_nuevo.imagen;
         mi_producto.categoria = producto_nuevo.categoria;
         mi_producto.precio = producto_nuevo.precio;
         mi_producto.unidad = producto_nuevo.unidad;
