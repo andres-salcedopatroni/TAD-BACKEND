@@ -1,5 +1,9 @@
 {
     "builds": [
+        {
+            "src": "package.json",
+            "use": "vercel-sapper"
+        },
       {
         "src": "./bin/www.js",
         "use": "@vercel/node"
