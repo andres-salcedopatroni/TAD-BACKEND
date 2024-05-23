@@ -20,12 +20,10 @@ jobs:
     steps:
     - uses: ozaytsev86/create-env-file@v1
       with:
-        envkey_DEBUG: false
-        USUARIO: ${{ secrets.USUARIO }}
-        CLAVE: ${{ secrets.CLAVE }}
-        CLUSTER: ${{ secrets.CLUSTER }}
-        BD: ${{ secrets.BD }}
-        file_name: .env
+        ENV_USUARIO: ${{ secrets.USUARIO }}
+        ENV_CLAVE: ${{ secrets.CLAVE }}
+        ENV_CLUSTER: ${{ secrets.CLUSTER }}
+        ENV_BD: ${{ secrets.BD }}
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
