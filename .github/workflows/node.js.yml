@@ -19,7 +19,10 @@ jobs:
 
     steps:
     - run: |
-          echo "USUARIO= ${{ secrets.USUARIO }}" >> $GITHUB_ENV
+          echo "USUARIO=${{ secrets.USUARIO }}" >> $GITHUB_ENV
+          echo "CLAVE=${{ secrets.CLAVE }}" >> $GITHUB_ENV
+          echo "CLUSTER=${{ secrets.CLUSTER }}" >> $GITHUB_ENV
+          echo "BD=${{ secrets.BD }}" >> $GITHUB_ENV
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
