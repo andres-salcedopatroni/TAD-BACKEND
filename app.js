@@ -17,6 +17,8 @@ const ventasRouter = require('./routes/ventas');
 const cors = require('cors')
 const bodyParser = require('body-parser')
 //Conexion Atlas
+console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+console.log(Usuario);
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://'+Usuario+':'+Clave+'@'+CLUSTER+'/'+BD+'?retryWrites=true&w=majority');
 
