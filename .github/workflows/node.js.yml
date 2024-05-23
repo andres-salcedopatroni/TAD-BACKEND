@@ -19,12 +19,7 @@ jobs:
 
     steps:
     - env:
-        FIREBASE_PROJECT_ID: ${{ secrets.USUARIO }}
-      run: |
-        import os
-        for q in (os.getenv("FIREBASE_PROJECT_ID")):
-          print(q)
-      shell: python
+        USUARIO: ${{ secrets.USUARIO }}
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
