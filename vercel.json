@@ -12,7 +12,11 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "./bin/www.js"
+        "dest": "./bin/www.js",
+        "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        "headers": {
+            "Access-Control-Allow-Origin": "*"
+        }
       }
     ]
   }
