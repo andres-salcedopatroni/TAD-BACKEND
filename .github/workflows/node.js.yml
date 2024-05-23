@@ -18,13 +18,12 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - env:
-        USUARIO: ${{ secrets.USUARIO }}
-      run: |
-        import os
-        for q in (os.getenv("USUARIO")):
-          print(q)
-      shell: python
+    - uses: ozaytsev86/create-env-file@v1
+        with:
+          ENV_USUARIO: ${{ secrets.USUARIO }}
+          ENV_CLAVE: ${{ secrets.CLAVE }}
+          ENV_CLUSTER: ${{ secrets.CLUSTER }}
+          ENV_BD: ${{ secrets.BD }}
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
