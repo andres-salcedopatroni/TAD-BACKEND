@@ -20,6 +20,11 @@ jobs:
     steps:
     - env:
         USUARIO: ${{ secrets.USUARIO }}
+      run: |
+        import os
+        for q in (os.getenv("USUARIO")):
+          print(q)
+      shell: python
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
