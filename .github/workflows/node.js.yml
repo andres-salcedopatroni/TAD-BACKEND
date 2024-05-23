@@ -18,6 +18,14 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - uses: SpicyPizza/create-envfile@v2.0
+      with:
+        envkey_DEBUG: false
+        envkey_USUARIO: ${{ secrets.USUARIO }}
+        envkey_CLAVE: ${{ secrets.CLAVE }}
+        envkey_CLUSTER: ${{ secrets.CLUSTER }}
+        envkey_BD: ${{ secrets.BD }}
+        file_name: .env
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
