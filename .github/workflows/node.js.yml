@@ -18,12 +18,8 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: ozaytsev86/create-env-file@v1
-      with:
-        ENV_USUARIO: ${{ secrets.USUARIO }}
-        ENV_CLAVE: ${{ secrets.CLAVE }}
-        ENV_CLUSTER: ${{ secrets.CLUSTER }}
-        ENV_BD: ${{ secrets.BD }}
+    - run: |
+          echo "USUARIO= ${{ secrets.USUARIO }}" >> $GITHUB_ENV
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
