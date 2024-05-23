@@ -18,7 +18,7 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: SpicyPizza/create-envfile@v2.0
+    - uses: ozaytsev86/create-env-file@v1
       with:
         envkey_DEBUG: false
         envkey_USUARIO: ${{ secrets.USUARIO }}
