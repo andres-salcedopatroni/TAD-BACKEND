@@ -3,16 +3,6 @@
     {
         "src": "package.json",
         "use": "vercel-sapper"
-    },
-    {
-      "src": "./app.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
     }
   ]
 }
