@@ -1,5 +1,5 @@
 require('dotenv').config();
-const Usuario=process.env.USUARIO;
+//const Usuario=process.env.USUARIO;
 const Clave=process.env.CLAVE;
 const BD=process.env.BD;
 const CLUSTER=process.env.CLUSTER;
