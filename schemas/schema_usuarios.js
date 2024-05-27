@@ -4,6 +4,7 @@ const schema_usuarios= new Schema(
     { 
         nombre: String, 
         imagen: String, 
+        descripcion: String, 
         clave: {type: String},
         tipo: {type: String},
         dni_ruc: {type: String},

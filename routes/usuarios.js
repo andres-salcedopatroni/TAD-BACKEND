@@ -58,6 +58,7 @@ router.post('/agregar_usuario', async function(req, res, next) {
       imagen: usuario.imagen, 
       nombre: usuario.nombre, 
       clave: usuario.clave,
+      descripcion: usuario.descripcion,
       correo: usuario.correo,
       celular: usuario.celular,
       fecha: fecha,
@@ -116,6 +117,7 @@ router.put('/actualizar_mi_usuario', async function(req, res, next) {
         usuario.nombre = usuario_nuevo.nombre;
         usuario.clave = usuario_nuevo.clave;
         usuario.tipo = usuario_nuevo.tipo;
+        usuario.descripcion = usuario_nuevo.descripcion;
         usuario.dni_ruc = usuario_nuevo.dni_ruc;
         usuario.correo = usuario_nuevo.correo;
         usuario.celular = usuario_nuevo.celular;
