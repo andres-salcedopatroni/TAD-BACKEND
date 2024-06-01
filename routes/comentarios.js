@@ -3,7 +3,7 @@ const router = express.Router();
 //Mongo
 const mongoose = require('mongoose');
 const schema_comentarios= require('../schemas/schema_comentarios');
-const comentarios = mongoose.model('Comentarios', schema_comentarios,'Comentarios');
+
 
 //Comentarios de producto
 router.get('/comentarios_producto/:nombre&:codigo_productor', async function(req, res, next) {
