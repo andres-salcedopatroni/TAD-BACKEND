@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 const usuariosRouter = require('./routes/usuarios');
 const productosRouter = require('./routes/productos');
 const ventasRouter = require('./routes/ventas');
+const comentariosRouter = require('./routes/comentarios');
 const cors = require('cors')
 const bodyParser = require('body-parser')
 //Conexion Atlas
@@ -36,6 +37,7 @@ app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/productos', productosRouter);
 app.use('/ventas', ventasRouter);
+app.use('/comentarios', comentariosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
