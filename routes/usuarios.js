@@ -25,6 +25,7 @@ router.get('/obtener_usuarios', async function(req, res, next) {
 router.get('/obtener_usuario/:dni_ruc', async function(req, res, next) {
   try{
     const dni_ruc = req.params.dni_ruc;
+    console.log(dni_ruc)
     const usuario = await usuarios.findOne({dni_ruc:dni_ruc});
     res.json(usuario);
   }
