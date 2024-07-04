@@ -8,7 +8,7 @@ const schema_productos= new Schema(
         categoria: String,
         precio: Number,
         unidad: String,
-        descuento: String,
+        descuento: Number,
         fecha: Date
     });
 
